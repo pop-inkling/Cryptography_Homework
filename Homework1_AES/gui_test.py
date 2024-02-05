@@ -3,6 +3,7 @@ from tkinter import ttk
 import AES
 import time
 
+# 将加密后的结果进行展示
 def encrypt_message():
     message = entry_message.get()
     start_time = time.time()
@@ -20,6 +21,7 @@ def encrypt_message():
 
     label_encrypt_time.config(text=f"加密时间为： {elapsed_time:.6f} 秒")
 
+# 将解密后的结果进行展示
 def decrypt_message():
     Ciphertext = entry_cipher.get()
     Key = entry_decryption_key.get()
@@ -64,6 +66,7 @@ text_generate_key.grid(row=6, column=0, columnspan=2, padx=5, pady=5)
 
 label_encrypt_time = ttk.Label(frame_encryption, text="加密时间为：")
 label_encrypt_time.grid(row=7, column=0, columnspan=2, padx=5, pady=5)
+
 # 解密窗口
 frame_decryption = ttk.LabelFrame(root, text="解密窗口")
 frame_decryption.grid(row=0, column=1, padx=10, pady=10, sticky="ew")

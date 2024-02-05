@@ -4,6 +4,7 @@ from random import randint
 
 sbox = s_box.generate_sbox()
 
+# 密钥扩展中的g函数
 def g_function(words, turn):
     word = words*1
     #第一步 字循环
@@ -23,7 +24,7 @@ def g_function(words, turn):
 
     return word
 
-
+# 密钥扩展
 def KeyExtend(key):
     words = np.ones((4,44),dtype=int)
     key = key.reshape(4,4,order='F')
@@ -38,6 +39,7 @@ def KeyExtend(key):
     
     return words
 
+# 生成随机128位密钥
 def generate_key():
     key = np.ones(16,dtype=int)
     for i in range(16):

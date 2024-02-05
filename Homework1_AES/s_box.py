@@ -1,5 +1,6 @@
 import numpy as np
 
+# 初始化S盒
 def initalize_sbox():
     sbox = np.ones((16,16),dtype = int) #用np.ones 函数生成16×16矩阵
 
@@ -9,13 +10,15 @@ def initalize_sbox():
     
     return sbox   
 
-def find_high(a):    #当前多项式的最高项
+#当前多项式的最高项
+def find_high(a):    
     i = 0
     while(a!=0):
         i+=1
         a=a>>1
     return i-1
 
+# 多项式除法
 def poly_div(a,b):
 
     b_len = find_high(b)
@@ -40,6 +43,7 @@ def poly_multi(a,b,c=0b100011011):
 
     return temp
 
+# 多项式扩展欧几里得算法
 def Poly_Extend_Euclid(a,b):
     xinv1, yinv1 = 1, 0
     x0, y0 = 0, 1
@@ -55,20 +59,22 @@ def Poly_Extend_Euclid(a,b):
         q, r = poly_div(a,b)
     return y0
 
+# 字节变换
 def byte_trans(num,c):
      result = 0
      for i in range(8):
           result += (((num>>i)&0x1) ^ ((num>>((i+4)%8))&0x1) ^ ((num>>((i+5)%8))&0x1) \
                     ^ ((num>>((i+6)%8))&0x1) ^ ((num>>((i+7)%8))&0x1) ^ ((c>>i)&0x1)) <<i
      return result
-     
+
+# 逆字节变换
 def byte_inv_trans(num,c):
     result = 0
     for i in range(8):
         result += (((num>>((i+2)%8))&0x1) ^ ((num>>((i+5)%8))&0x1) ^ ((num>>((i+7)%8))&0x1) ^ ((c>>i)&0x1)) <<i
     return result
         
-
+# 生成S盒
 def generate_sbox():
     sbox = initalize_sbox()
     
@@ -82,6 +88,7 @@ def generate_sbox():
               
     return sbox
 
+# 生成逆S盒
 def generate_inv_sbox():
     sbox = initalize_sbox()
 

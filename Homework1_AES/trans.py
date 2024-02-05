@@ -22,16 +22,19 @@ def Mix_inv_Col(text):
     temp[3] = poly_multi(0x0B,text[0]) ^ poly_multi(0x0D,text[1]) ^ poly_multi(0x09,text[2]) ^ poly_multi(0x0E,text[3])
 
     return temp
+
 #对整个矩阵进行混淆
 def Col_Fusion(texts):
     for i in range(4):
         texts[:,i] = Mix_Col(texts[:,i])
     return texts
 
+# 逆列混淆
 def Col_inv_Fusion(texts):
     for i in range(4):
         texts[:,i] = Mix_inv_Col(texts[:,i])
     return texts
+
 ## 行移位变换
 # 左移位变换
 def Left_Shift(text,bit):
@@ -42,7 +45,6 @@ def Left_Shift(text,bit):
 
     return shift_text
 
-# print(Left_Shift(np.array([2,3,1,1,3,5,6,7]),3))
 # 右移位变换
 def Right_Shift(text,bit):
     length = np.size(text)
@@ -52,14 +54,14 @@ def Right_Shift(text,bit):
 
     return shift_text
 
-# print(Right_Shift(np.array([2,3,1,1,3,5,6,7]),3))
-
+# 行移位变换
 def Row_Shift(texts):
     for i in range(1,4):
         texts[i] = Left_Shift(texts[i],i)
     
     return texts
 
+# 逆行移位变换
 def Row_inv_Shift(texts):
     for i in range(1,4):
         texts[i] = Right_Shift(texts[i],i)

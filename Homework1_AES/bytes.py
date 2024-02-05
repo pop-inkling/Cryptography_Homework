@@ -5,6 +5,7 @@ def split_bytes(data, chunk_size):
     """ 将字节数据分割成指定大小的块。 """
     return [data[i:i + chunk_size] for i in range(0, len(data), chunk_size)]
 
+# 将字节进行分割
 def str2array_Plain(text):
     # 将字符串转换为字节序列
     text_bytes = text.encode('utf-8')
@@ -21,6 +22,7 @@ def str2array_Plain(text):
 
     return byte_arrays
 
+# 对Numpy数组base64编码为字符串
 def array2str_base64(arrays):
     arrays = arrays.astype(np.uint8)
     array_bytes = arrays.tobytes()
@@ -29,6 +31,7 @@ def array2str_base64(arrays):
 
     return array_string
 
+# 将字符串base64解码为Numpy数组
 def str2array_base64(string):
     arrays = string.encode('ascii')
     arrays = base64.b64decode(arrays)
